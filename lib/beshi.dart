@@ -1,18 +1,27 @@
+import 'dart:math' as math;
+import 'dart:developer' as dev;
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class beshi extends StatelessWidget {
-  const beshi({Key? key}) : super(key: key);
+class Beshi extends StatefulWidget {
+  const Beshi({super.key});
 
+  @override
+  State<Beshi> createState() => _BeshiState();
+}
+
+class _BeshiState extends State<Beshi> {
+  int leftDice = 1;
+  int rightDice = 6;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange,
+      backgroundColor: Colors.deepOrangeAccent,
       appBar: AppBar(
-        backgroundColor: Colors.orange,
-        elevation: 10,
+        backgroundColor: Colors.deepOrangeAccent,
+        elevation: 15,
         title: Center(
           child: Text(
             'beshinchi zadanie',
@@ -26,13 +35,27 @@ class beshi extends StatelessWidget {
             Expanded(
                 child: Padding(
               padding: const EdgeInsets.all(30.0),
-              child: Image.asset('images/1.png'),
+              child: InkWell(
+                  onTap: () {
+                    final random = math.Random().nextInt(6) + 1;
+                    leftDice = random;
+                    dev.log('     $leftDice');
+                    setState(() {});
+                  },
+                  child: Image.asset('images/Dice$leftDice.png')),
             )),
             Expanded(
                 child: Padding(
               padding: const EdgeInsets.all(30.0),
-              child: Image.asset('images/2.png'),
-            ))
+              child: InkWell(
+                  onTap: () {
+                    final random = math.Random().nextInt(6) + 1;
+                    leftDice = random;
+                    dev.log('   $rightDice');
+                    setState(() {});
+                  },
+                  child: Image.asset('images/Dice$rightDice.png')),
+            )),
           ],
         ),
       ),
